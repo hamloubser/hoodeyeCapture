@@ -22,6 +22,9 @@ function onDeviceReady() {
     listintype1();
     listcommunity2();//--- thing for default com
     listevents();
+    
+ 
+    
     navigator.splashscreen.hide();
   
 
@@ -127,6 +130,10 @@ google.maps.event.addDomListener(window, 'load', initialize);
 function onGeolocationError(error) {
     $("#myLocation").html("<span class='err'>" + error.message + "</span>");
 }
+
+
+
+
 //=======================Get Community from hoodeye=======================//
 
 function listCommunities() {
