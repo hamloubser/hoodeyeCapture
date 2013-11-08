@@ -97,8 +97,8 @@ function onGeolocationSuccess(position) {
     //var googleApis_map_Url = 'http://maps.googleapis.com/maps/api/staticmap?size=300x200&maptype=street&zoom=13&sensor=true&markers=size:mid%7Ccolor:red%7C' + latlng + latlngalert ;
     
     
-    var latlngalert = "|-26.11305892469931,27.984621|-26.113058924691,27.984620891537|-26.1130589249,27.984620892"
-    
+   // var latlngalert = "|-26.11305892469931,27.984621|-26.113058924691,27.984620891537|-26.1130589249,27.984620892"
+     var latlngalert = ""
     var googleApis_map_Url = 'http://maps.googleapis.com/maps/api/staticmap?size=300x200&maptype=street&zoom=13&sensor=true&markers=size:mid%7Ccolor:red%7C' + latlng + latlngalert ;
     var mapImg = '<img src="' + googleApis_map_Url + '" />';
     $("#map_canvas").html(mapImg);
@@ -264,7 +264,7 @@ function listevents() {
       var items_html;
       var count = 0;
       $.each(data, function(key, event) { 
-         items_html += '<li><img src="images/imgviewalerts.png" style="width: 20px; height: 20px;" /> '+event.intype+'<br/>'+event.detail+'</li>';
+         items_html += '<li><img src="images/imgviewalerts.png" style="width: 20px; height: 20px;" /> '+event.intype+''+event.detail+''+event.detail+'<br>|'+event.lat+','+event.long+'|</br></li>';
          count += 1;
       });
        	   if (count == 0) {
