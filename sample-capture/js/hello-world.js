@@ -95,10 +95,18 @@ function onGeolocationSuccess(position) {
     // Use Google API to get a map of the current location
     // http://maps.googleapis.com/maps/api/staticmap?size=280x300&maptype=hybrid&zoom=16&markers=size:mid%7Ccolor:red%7C42.375022,-71.273729&sensor=true
     //var googleApis_map_Url = 'http://maps.googleapis.com/maps/api/staticmap?size=300x200&maptype=street&zoom=13&sensor=true&markers=size:mid%7Ccolor:red%7C' + latlng + latlngalert ;
-    
-    
+ 	//      		 var lat = hoodeye_last_position.coords.latitude;
+  	//			 var long = hoodeye_last_position.coords.longitude;
+    //
+    //   	    $('#map_canvas').gmap().bind('init', function(ev, map) {
+	//		$('#map_canvas').gmap('addMarker', {'position': ''+lat+','+long+'', 'bounds': true}).click(function() {
+	//		$('#map_canvas').gmap('openInfoWindow', {'content': 'Hello World!'}, this);
+	//				});
+	//			});
+   
+  //  -----------good  
    // var latlngalert = "|-26.11305892469931,27.984621|-26.113058924691,27.984620891537|-26.1130589249,27.984620892"
-     var latlngalert = ""
+    var latlngalert = ""
     var googleApis_map_Url = 'http://maps.googleapis.com/maps/api/staticmap?size=300x200&maptype=street&zoom=13&sensor=true&markers=size:mid%7Ccolor:red%7C' + latlng + latlngalert ;
     var mapImg = '<img src="' + googleApis_map_Url + '" />';
     $("#map_canvas").html(mapImg);
@@ -262,17 +270,38 @@ function listevents() {
    $("#eventlisttitle").html("inf " + currentcommunity.name);
    $.get('http://dev.hoodeye.com:4242/api/event?'+params,function(data) {
       var items_html;
+       var latlngalert;
+       
       var count = 0;
       $.each(data, function(key, event) { 
-         items_html += '<li><img src="images/imgviewalerts.png" style="width: 20px; height: 20px;" /> '+event.intype+''+event.detail+''+event.detail+'<br>|'+event.lat+','+event.long+'|</br></li>';
-         count += 1;
+         items_html += '<li><img src="images/imgviewalerts.png" style="width: 20px; height: 20px;" /> '+event.intype+''+event.detail+'<br>|'+event.lat+','+event.long+'|</br></li>';
+     	
+          latlngalert += '|'+event.lat+','+event.long
+          
+          count += 1;
       });
        	   if (count == 0) {
               items_html = "<li>No Events found.</li>";
           }
      $("#eventlist").html(items_html);
+   
+   // var latlngalert = "|-26.11305892469931,27.984621|-26.113058924691,27.984620891537|-26.1130589249,27.984620892"
+    
+    var lat = hoodeye_last_position.coords.latitude;
+    var long = hoodeye_last_position.coords.longitude;
+       
+       
+   var googleApis_map_Url = 'http://maps.googleapis.com/maps/api/staticmap?center='+lat+','+long+'&size=300x200&maptype=street&zoom=11&sensor=true&markers=size:mid%7Ccolor:red%7C' +  latlngalert ;
+   var mapImg = '<img src="' + googleApis_map_Url + '" />';
+    $("#map_canvas_events").html(mapImg);       
+       
+  
 
-    });
+   
+   
+   
+   
+   });
 }
 
  
