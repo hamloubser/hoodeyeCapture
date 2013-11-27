@@ -109,10 +109,40 @@ function onGeolocationSuccess(position) {
    
   //  -----------good  
    // var latlngalert = "|-26.11305892469931,27.984621|-26.113058924691,27.984620891537|-26.1130589249,27.984620892"
-    var latlngalert = ""
-    var googleApis_map_Url = 'http://maps.googleapis.com/maps/api/staticmap?size=300x200&maptype=street&zoom=13&sensor=true&markers=size:mid%7Ccolor:red%7C' + latlng + latlngalert ;
-    var mapImg = '<img src="' + googleApis_map_Url + '" />';
-    $("#map_canvas").html(mapImg);
+ //   var latlngalert = ""
+ //   var googleApis_map_Url = 'http://maps.googleapis.com/maps/api/staticmap?size=300x200&maptype=street&zoom=13&sensor=true&markers=size:mid%7Ccolor:red%7C' + latlng + latlngalert ;
+ //   var mapImg = '<img src="' + googleApis_map_Url + '" />';
+ //   $("#map_canvas").html(mapImg);
+    
+    
+    var lat = hoodeye_last_position.coords.latitude;
+    var long = hoodeye_last_position.coords.longitude;
+     
+  var latlng = new google.maps.LatLng (lat, long);
+  var options = { 
+    zoom : 15, 
+    center : latlng, 
+    mapTypeId : google.maps.MapTypeId.ROADMAP 
+  };
+  var $content = $("#pagemap div:jqmData(role=content)");
+  $content.height (screen.height - 50);
+  var map = new google.maps.Map ($content[0], options);
+  $.mobile.changePage ($("#pagemap"));
+  
+  new google.maps.Marker ( 
+  { 
+    map : map, 
+    animation : google.maps.Animation.DROP,
+    position : latlng  
+  }); 
+
+    
+    //--------------------------------
+
+    
+    
+    
+    
     
 }
 
