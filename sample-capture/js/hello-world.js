@@ -115,6 +115,8 @@ function onGeolocationSuccess(position) {
  //   $("#map_canvas").html(mapImg);
     
     
+    //------------hear follows a cool map
+    
     var lat = hoodeye_last_position.coords.latitude;
     var long = hoodeye_last_position.coords.longitude;
      
@@ -134,6 +136,7 @@ function onGeolocationSuccess(position) {
     map : map, 
     animation : google.maps.Animation.DROP,
     position : latlng  
+      
   }); 
 
     
