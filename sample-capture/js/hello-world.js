@@ -45,6 +45,9 @@ $('#eventlistpage').live('pageshow',function(event, ui){
 
 function getLocation() {
     navigator.geolocation.getCurrentPosition(onGeolocationSuccess, onGeolocationError);
+    
+    
+    listeventlocations();
 }
   
 //=======================Say Hello (Page 1) Operations=======================//
@@ -335,16 +338,75 @@ function listevents() {
    var mapImg = '<img src="' + googleApis_map_Url + '" />';
     $("#map_canvas_events").html(mapImg);       
        
-  
 
-   
-   
-   
    
    });
 }
 
  
+
+//------------------try to get cool map with locations   
+
+function listeventlocations() {
+    var lat = hoodeye_last_position.coords.latitude;
+    var long = hoodeye_last_position.coords.longitude;
+    var params = 'community_id=' + currentcommunity._id;
+  // $("#eventlisttitle").html("inf " + currentcommunity.name);
+ 
+    $.get('http://dev.hoodeye.com:4242/api/event?'+params,function(data) {
+         var event_locations = ['you are here', lat,long,1] ;
+         var count = 0;
+          $.each(data, function(key, event) { 
+             event_locations += ',[''+event.intype+'','+event.lat+','+event.long+',2]';
+             count += 1;
+          });
+               if (count == 0) {
+                  event_locations = "['you are here', lat,long,1]";
+              }
+      
+    });
+   
+    //----- create the array of event locations
+    
+	var locations = [ event_locations ];
+
+   
+var latlng = new google.maps.LatLng (lat, long);
+  var options = { 
+    zoom : 10, 
+    center : latlng, 
+    mapTypeId : google.maps.MapTypeId.ROADMAP 
+  };
+  var $content = $("#pagemap div:jqmData(role=content)");
+  $content.height (screen.height - 50);
+  var map = new google.maps.Map ($content[0], options);
+  $.mobile.changePage ($("#pagemap"));    
+    
+    
+    
+    
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+
+    for (i = 0; i < locations.length; i++) {  
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        map: map
+      });
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][0]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+
+
+}
+
+
       
 
  function submitEvent() {
