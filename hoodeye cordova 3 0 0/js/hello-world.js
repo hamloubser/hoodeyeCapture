@@ -18,13 +18,11 @@ function onDeviceReady() {
 
   
    // listCommunities1()
-    
     //listactivity();  //--- depricated
     listintype1();
     listcommunity2();//--- thing for default com
     listevents();
-   
-        getLocation(); 
+    getLocation(); 
    
  
     
@@ -130,8 +128,8 @@ function onGeolocationSuccess(position) {
              
   
     
- locations.push(['1 you are here', lat,long,1] );     // works
- locations.push(['ilze', -26.113057,27.984621 , 2])   ;  // need to loop this.
+ 	locations.push(['1 you are here', lat,long,1] );     // works
+  //  locations.push(['ilze', -26.113057,27.984621 , 2])   ;  // need to loop this.
  
           var latlng = new google.maps.LatLng (lat, long);
           var options = { 
@@ -336,7 +334,7 @@ function listevents() {
           
           
          	// and event locations to loacation variable		  //--bad == bad	/--bad == bad/--bad == bad/--bad == bad		
-           locations.push([ "event ", event.lat , event.long , 2]) ;
+           locations.push([ 'event', event.lat , event.long , 2]) ;
           
           count += 1;
       });
