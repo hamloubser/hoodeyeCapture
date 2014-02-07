@@ -9,7 +9,7 @@ var currentcommunity ;
 var community_list;
 var intype_list ;
 
-var locations = [];
+var locations ;
 
 
 // PhoneGap is ready
@@ -21,7 +21,8 @@ function onDeviceReady() {
     //listactivity();  //--- depricated
     listintype1();
     listcommunity2();//--- thing for default com
-    listevents();
+   // listevents();
+  
     getLocation(); 
    
  
@@ -334,7 +335,7 @@ function listevents() {
           
           
          	// and event locations to loacation variable		  //--bad == bad	/--bad == bad/--bad == bad/--bad == bad		
-           locations.push([ 'event', event.lat , event.long , 2]) ;
+          // locations.push([ 'event', event.lat , event.long , 2]) ;
           
           count += 1;
       });
